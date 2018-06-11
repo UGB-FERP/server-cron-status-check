@@ -19,7 +19,9 @@ $hosts = ['nead.ugb.edu.br', 'revista.ugb.edu.br', 'nead.ugb.edu.br',
 * All key users to be alerted when a host is off
 * @var array
 */
-$keys = ['alannunes@ugb.edu.br'];
+$keys = ['alannunes@ugb.edu.br', 'gustavobrandao@ugb.edu.br',
+        'guybrito@ugb.edu.br', 'rosenclevergazoni@ugb.edu.br',
+        'suportesistema@ugb.edu.br'];
 
 foreach ($hosts as $host) {
   if($socket =@ fsockopen($host, 80, $errno, $errstr, 30)) {
@@ -35,9 +37,10 @@ foreach ($hosts as $host) {
     $mail->setConfig();
     $mail->subject = 'SERVIDOR FORA DO AR (MENSAGEM AUTOMATICA)';
     $mail->saudacao = welcome(date('H')) . '!';
-    $mail->msg = "O servidor com o domínio <strong>{$host}</strong> acabou de sair do
-    ar.<br/><strong>Att.</strong><p><i>Esta mensagem foi enviada automaticamente
-    </i>.</p>";
+    $mail->msg = "O servidor com o domínio <strong>{$host}</strong> acabou de
+    sair do ar.<br/><br/>Número do erro: <strong>{$errno}</strong><br/>Mensagem
+    de Erro: <strong>{$errstr}</strong><br/><br/><strong>Att.</strong><p><i>Esta
+     mensagem foi enviada automaticamente</i>.</p>";
     /**
     * Walks through all key users and send a email to them
     */
